@@ -5,7 +5,7 @@
   </script>
   
   <div class="container">
-    <h1>Greeting Page</h1>
+    <h1>New Page</h1>
     <p>Hello, {name}! You've been greeted from the new page.</p>
     <a href="/">Go back</a>
   </div>
