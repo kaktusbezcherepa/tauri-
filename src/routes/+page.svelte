@@ -4,12 +4,12 @@
   let name = "";
 
   function greet() {
-    // Переход на новую страницу
     goto('/greeting?name=' + encodeURIComponent(name));
   }
 </script>
 
-<div class="container">
+<div class="background">
+  <div class="container">
   <h1>Welcome to Svelte!</h1>
 
   <p>Enter a name and click "Greet" to go to the greeting page.</p>
@@ -18,10 +18,15 @@
     <input id="greet-input" placeholder="Enter a name..." bind:value={name} />
     <button type="submit">Greet</button>
   </form>
+  </div>
 </div>
 
 <style>
-  /* Ваши стили остаются без изменений */
+    .background {
+    height: 100%;
+    width: 100%;
+    background: url("../../assets/background/mainmenu.png");
+  }
   .container {
     margin: 0;
     padding-top: 10vh;
