@@ -3,7 +3,7 @@
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build",
     "devPath": "http://localhost:1420",
-    "distDir": "../build"
+    "distDir": "../dist"
   },
   "package": {
     "productName": "newtest",
@@ -15,6 +15,19 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "window": {
+        "all": false,
+        "close": true
+      },
+      "fs": {
+        "all": true,
+        "readFile": true,
+        "scope": ["$ASSET/*"]
+      },
+      "protocol": {
+        "asset": true,
+        "assetScope": ["$ASSET/*"]
       }
     },
     "windows": [
@@ -25,7 +38,7 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; media-src 'self' asset: https://asset.localhost file:"
     },
     "bundle": {
       "active": true,
@@ -37,7 +50,28 @@
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
-      ]
+      ],
+      "resources": [],
+      "externalBin": [],
+      "copyright": "",
+      "category": "DeveloperTool",
+      "shortDescription": "",
+      "longDescription": "",
+      "deb": {
+        "depends": []
+      },
+      "macOS": {
+        "frameworks": [],
+        "exceptionDomain": "",
+        "signingIdentity": null,
+        "providerShortName": null,
+        "entitlements": null
+      },
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
     }
   }
 }
