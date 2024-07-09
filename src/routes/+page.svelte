@@ -1,22 +1,41 @@
 <script>
-  // import { goto } from '$app/navigation';
+  import { goto } from '$app/navigation';
+  import { fade } from 'svelte/transition';
+  import { window as tauriWindow } from "@tauri-apps/api";
 
-  // let name = "";
+  let isTransitioning = false;
 
-  // function greet() {
-  //   goto('/greeting?name=' + encodeURIComponent(name));
-  // }
+  async function toGame() {
+    isTransitioning = true;
+    await new Promise(resolve => setTimeout(resolve, 300)); 
+    goto('/game');
+  }
+
+  async function toFate() {
+    isTransitioning = true;
+    await new Promise(resolve => setTimeout(resolve, 300))
+    goto('/fate_game')
+  }
+
+  const closeWin = async () => {
+  const appWindow = tauriWindow.getCurrent();
+  await appWindow.close();
+}
 </script>
 
-  <div class="back-container">
+{#if !isTransitioning}
+  <div class="back-container" in:fade={{ duration: 300 }} out:fade={{ duration: 300 }}>
     <div class="main-back">
-    <div class="container">
-      <button>Play</button>
-      <button>Settings</button>
-      <button>Exit</button>
+      <div class="container">
+        <button on:click={toGame}>Play PVP</button>
+        <button on:click={toFate}>Find your FATE</button>
+        <button>Settings</button>
+        <button on:click={closeWin}>Exit</button>
+      </div>
     </div>
   </div>
-</div>
+{/if}
+
 
 <style>
 
@@ -36,6 +55,7 @@ button {
   font-family: "Indie Flower", cursive;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 @media(max-width: 400px) {
@@ -47,7 +67,7 @@ button {
 .main-back {
   width: 100vw;
   height: 100vh;
-  background: url('../assets/background/giphy.gif') no-repeat center;
+  background: url('../assets/background/mainmenu.gif') no-repeat center;
   background-size: cover;
 }
 
