@@ -4,7 +4,8 @@
   let card = "/src/assets/background/newcoloda2.jpg";
   let cardSlots = [null, null, null];
   let availableCards = [];
-  const TOTAL_CARDS = 22; // длинна
+  let showedCards = 0;
+  const TOTAL_CARDS = 22;
 
   onMount(() => {
     availableCards = Array.from({length: TOTAL_CARDS}, (_, i) => `/src/assets/cards/card${i + 1}.jpg`);
@@ -23,6 +24,7 @@
       if (randomCard) {
         cardSlots[emptySlotIndex] = randomCard;
         cardSlots = [...cardSlots];
+        showedCards += 1;
       } else {
         alert('Карты закончились');
       }
@@ -35,6 +37,12 @@
     if (event.key === 'Enter') {
       handleClick();
     }
+  }
+
+  function reset() {
+    cardSlots = [null, null, null];
+    availableCards = Array.from({length: TOTAL_CARDS}, (_, i) => `/src/assets/cards/card${i + 1}.jpg`);
+    showedCards = 0;
   }
 </script>
 
@@ -54,8 +62,13 @@
   <img class="name" src={card} alt="newtaro">
 </button>
 
+{#if showedCards === 3}
+  <button class="reset-button" on:click={reset}>Reset</button>
+{/if}
+
 <style>
   .back {
+    display: flex;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -107,5 +120,10 @@
     z-index: 4;
     clip-path: inset(5%);
     transform: rotate(90deg);
+  }
+  .reset-button {
+   position: absolute;
+   left: 50%;
+   top: 80%;
   }
 </style>
